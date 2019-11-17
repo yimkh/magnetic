@@ -18,16 +18,30 @@ Listener.prototype.addListener = function(event, handler) {
   _addListener(this, event, handler)
 }
 
-function dispatch(target, event, args) {
+function dispatchElectronEvent(target, event, args) {
   target.eventEmitter.emit(event, args)
 }
 
-Listener.prototype.register = function(target, events) {
+function dispatchNodeEvent(target, event, args) {
+  target.eventEmitter.emit(event, args)
+}
+
+Listener.prototype.registerElectronEvents = function(target, events) {
   const that = this
 
   events.forEach(event => {
     target.on(event, (ev, ...data) => {
-      dispatch(that, event, data)
+      dispatchElectronEvent(that, event, data)
+    })
+  })
+}
+
+Listener.prototype.registerNodeEvents = function(target, events) {
+  const that = this
+
+  events.forEach(event => {
+    target.on(event, (...data) => {
+      dispatchNodeEvent(that, event, data)
     })
   })
 }

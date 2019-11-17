@@ -1,7 +1,7 @@
 const { app } = require('electron')
 
-const Listener = require('./listeners')
-const { createWindow, onActivateWindow } = require('./listeners/window')
+const Listener = require('./utility/listener')
+const { createWindow, onActivateWindow } = require('./handlers/window')
 
 const listener = new Listener()
 listener.addListener('ready', createWindow)
@@ -12,4 +12,4 @@ listener.addListener('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-listener.register(app, ['ready', 'activate', 'window-all-closed'])
+listener.registerElectronEvents(app, ['ready', 'activate', 'window-all-closed'])
