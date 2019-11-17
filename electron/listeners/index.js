@@ -1,22 +1,35 @@
-let listeners = {}
+const EventEmitter = require('events')
 
-function addListener(event, handler) {
-  if (listeners[event] == undefined) {
-    listeners[event] = [handler]
-  } else {
-    listeners[event].push(handler)
+function Listener() {
+  Listener.init.call(this)
+}
+
+Listener.init = function() {
+  if (this.eventEmitter == undefined) {
+    this.eventEmitter = new EventEmitter()
   }
 }
 
-function execute(app) {
-  for (const event of Object.keys(listeners)) {
-    listeners[event].forEach(handler => {
-      app.on(event, handler)
+function _addListener(target, event, handler) {
+  target.eventEmitter.addListener(event, handler)
+}
+
+Listener.prototype.addListener = function(event, handler) {
+  _addListener(this, event, handler)
+}
+
+function dispatch(target, event, args) {
+  target.eventEmitter.emit(event, args)
+}
+
+Listener.prototype.register = function(target, events) {
+  const that = this
+
+  events.forEach(event => {
+    target.on(event, (ev, ...data) => {
+      dispatch(that, event, data)
     })
-  }
+  })
 }
 
-module.exports = {
-    addListener,
-    execute
-}
+module.exports = Listener
