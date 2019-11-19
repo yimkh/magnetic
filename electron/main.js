@@ -15,3 +15,13 @@ listener.addListener('window-all-closed', () => {
 })
 
 listener.registerElectronEvents(app, ['ready', 'activate', 'window-all-closed'])
+
+// Debug Code
+const { processList } = require('./utility/exec')
+async function getProcessList() {
+  const pl = await processList()
+
+  console.log(pl)
+}
+
+getProcessList()
