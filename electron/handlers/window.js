@@ -1,6 +1,7 @@
 const { BrowserWindow } = require('electron')
 
 let mainWindow
+const baseURL = 'http://localhost:3000'
 
 function createWindow () {
   // Create the browser window.
@@ -17,7 +18,7 @@ function createWindow () {
   mainWindow.setFullScreen(true)
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.loadURL('http://localhost:3000')
+    mainWindow.loadURL(baseURL)
   }
 
   // Open the DevTools.
@@ -39,7 +40,18 @@ function onActivateWindow (hasVisibleWindows) {
   if (mainWindow === null) createWindow()
 }
 
+function onLoadPage(page) {
+  if (mainWindow === null) {
+    createWindow()
+  }
+
+  if (page) {
+    mainWindow.loadURL(`${baseURL}/${page}`)
+  }
+}
+
 module.exports = {
   createWindow,
   onActivateWindow,
+  onLoadPage,
 }

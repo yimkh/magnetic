@@ -1,4 +1,5 @@
 const { Menu } = require('electron')
+const { onLoadPage } = require('./handlers/window')
 
 const macOSTemplate = [
   // { role: 'appMenu' },
@@ -26,6 +27,17 @@ const macOSTemplate = [
       { role: 'togglefullscreen' }
     ]
   },
+  {
+    label: 'System',
+    submenu: [
+      {
+        label: 'Process',
+        click: async () => {
+          onLoadPage('process')
+        }
+      }
+    ]
+  }
 ]
 
 let menu = undefined
@@ -38,6 +50,10 @@ function createDefaultMenu() {
   return menu
 }
 
+function onCreateMenu() {
+  Menu.setApplicationMenu(createDefaultMenu())
+}
+
 module.exports = {
-  createDefaultMenu
+  onCreateMenu
 }

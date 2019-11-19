@@ -2,7 +2,7 @@ const { app } = require('electron')
 
 const Listener = require('./utility/listener')
 const { createWindow, onActivateWindow } = require('./handlers/window')
-const { onCreateMenu } = require('./handlers/menu')
+const { onCreateMenu } = require('./menu')
 
 const listener = new Listener()
 listener.addListener('ready', createWindow)
