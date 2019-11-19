@@ -2,9 +2,11 @@ const { app } = require('electron')
 
 const Listener = require('./utility/listener')
 const { createWindow, onActivateWindow } = require('./handlers/window')
+const { onCreateMenu } = require('./handlers/menu')
 
 const listener = new Listener()
 listener.addListener('ready', createWindow)
+listener.addListener('ready', onCreateMenu)
 listener.addListener('activate', onActivateWindow)
 listener.addListener('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
