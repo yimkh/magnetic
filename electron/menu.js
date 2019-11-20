@@ -37,6 +37,17 @@ const macOSTemplate = [
         }
       }
     ]
+  },
+  {
+    label: 'Experimental',
+    submenu: [
+      {
+        label: 'Leaflet',
+        click: async () => {
+          onLoadPage('leaflet')
+        }
+      }
+    ]
   }
 ]
 
