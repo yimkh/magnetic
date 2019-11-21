@@ -1,35 +1,32 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { base64ToState } from './utils'
 
-class View extends React.Component {
-  constructor (props) {
-    super(props)
-    const {
-      match: {
-        params: { base64 }
-      },
-      location: { search }
-    } = props
-    this.json = base64ToState(base64, search)
-  }
+const View = (props) => {
+  let container = useRef(null)
+  
+  const {
+    match: {
+      params: { base64 }
+    },
+    location: { search }
+  } = props
+  const json = base64ToState(base64, search)
 
-  render () {
-    return (
-      <div
-        ref={div => {
-          this.container = div
-        }}
-      >
-        {this.json.code}
-      </div>
-    )
-  }
+  useEffect(() => {
+    mermaid.initialize(json.mermaid)
+    mermaid.init(undefined, container)
+  })
 
-  componentDidMount () {
-    mermaid.initialize(this.json.mermaid)
-    mermaid.init(undefined, this.container)
-  }
+  return (
+    <div
+      ref={div => {
+        container = div
+      }}
+    >
+      {json.code}
+    </div>
+  )
 }
 
 export default View

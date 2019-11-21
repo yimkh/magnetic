@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import { Base64 } from 'js-base64'
@@ -12,7 +12,6 @@ const Mermaid = () => {
     <div id="map">
       <Head>
         <title>Mermaid Basic</title>
-        
       </Head>
       <Router>
         <Switch>
