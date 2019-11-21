@@ -46,6 +46,12 @@ const macOSTemplate = [
         click: async () => {
           onLoadPage('leaflet')
         }
+      },
+      {
+        label: 'Mermaid',
+        click: async () => {
+          onLoadPage('mermaid')
+        }
       }
     ]
   }
