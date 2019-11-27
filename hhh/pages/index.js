@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import ProLayout from '@ant-design/pro-layout'
 
 const Home = () => (
   <div>
@@ -8,8 +7,6 @@ const Home = () => (
       <title>Home</title>
       <link rel='icon' href='/favicon.ico' />
     </Head>
-
-    <ProLayout />
   </div>
 )
 

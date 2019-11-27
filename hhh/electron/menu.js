@@ -28,17 +28,6 @@ const macOSTemplate = [
     ]
   },
   {
-    label: 'System',
-    submenu: [
-      {
-        label: 'Process',
-        click: async () => {
-          onLoadPage('process')
-        }
-      }
-    ]
-  },
-  {
     label: 'Experimental',
     submenu: [
       {
@@ -47,12 +36,6 @@ const macOSTemplate = [
           onLoadPage('leaflet')
         }
       },
-      {
-        label: 'Mermaid',
-        click: async () => {
-          onLoadPage('mermaid')
-        }
-      }
     ]
   }
 ]
